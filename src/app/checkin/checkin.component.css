@@ -1,0 +1,14 @@
+.text-qrcode, .text-qrcode:focus {
+    border: none; 
+    outline: none;
+    background: none;
+    color: black;
+    mix-blend-mode: screen;
+}
+
+#bttn-search {
+    position: fixed;
+    top: 90vh;
+    width: 25vw;
+    left: 37.5vw;
+}

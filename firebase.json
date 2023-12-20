@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "ko-lucky-draw",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

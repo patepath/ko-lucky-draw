@@ -88,6 +88,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "ko-lucky-draw:build:production",
+              "serveTarget": "ko-lucky-draw:serve:production"
+            },
+            "development": {
+              "buildTarget": "ko-lucky-draw:build:development",
+              "serveTarget": "ko-lucky-draw:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

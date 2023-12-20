@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "playground-2ed6e": {
+      "hosting": {
+        "ko-lucky-draw": [
+          "playground-2ed6e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "playground-2ed6e"
+  }
+}

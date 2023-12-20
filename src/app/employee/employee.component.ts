@@ -1,0 +1,133 @@
+import { Component } from '@angular/core';
+import { Employee } from '../models/employee';
+import { EmployeeService } from '../services/employee.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+declare var $:any;
+declare interface DataTable {
+    headerRow: string[];
+    footerRow: string[];
+    dataRows: string[][];
+}
+
+@Component({
+  selector: 'app-employee',
+  standalone: true,
+  imports: [ CommonModule, FormsModule ],
+  templateUrl: './employee.component.html',
+  styleUrl: './employee.component.css'
+})
+export class EmployeeComponent {
+
+	public dataTable!: DataTable;
+	public data!: string[][];
+
+  public emplies: Employee[] = [];
+  public emply: Employee = <Employee>{};
+  public curIndex: number = -1;
+
+  constructor(private emplyServ: EmployeeService) {
+
+    this.dataTable = {
+      headerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้' ],
+      footerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้' ],
+      dataRows: [],
+    };
+
+    this.emply.isCheck = false;
+    this.emply.present = '';
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+		let self = this;
+
+		let table = $('#employee-table').DataTable({
+			dom: 'frtip',
+			responsive: true,
+			columnDefs: [ { targets: [0, 2], width: '5em', className: 'text-center' } ],
+			language: {
+				search: "_INPUT_",
+				searchPlaceholder: "Search records",
+			},
+      paging: true,
+      pageLenght: 10,
+			pagingType: "full_numbers",
+		});
+
+    table.on('mouseover', 'tr', function(this: any) {
+      $(this).css('cursor', 'pointer');
+			$(this).css('font-weight', 'bold');
+    })
+
+    table.on('mouseout', 'tr', function(this: any) {
+			$(this).css('font-weight', 'normal');
+    })
+
+		table.on('click', 'td', function(this: any) {
+      self.curIndex = table.row(this).index();
+
+      if(self.curIndex > -1) {
+        self.emply = self.emplies[self.curIndex];
+      }
+		});
+
+    self.findAll();
+  }
+
+  refresh() {
+		let table = $('#employee-table').DataTable();
+		table.clear();
+    this.data = [];
+  
+    if(this.emplies.length > 0) {
+      this.emplies.forEach(s => {
+        this.data.push([
+          s.code, 
+          s.fullName,
+          s.isCheck ? '/' : '',
+          s.present
+        ]);
+      });
+
+      table.rows.add(this.data)
+    }
+
+    table.draw();
+  }
+
+  findAll() {
+    this.emplyServ.findAll().subscribe(s => {
+      this.emplies = s;
+      this.refresh();
+    });
+  }
+
+  newEmply() {
+    this.emply = <Employee>{};
+    this.emply.id = '';
+    this.emply.isCheck = false;
+    this.emply.present = '';
+  }
+
+  saveEmployee() {
+    if(this.emply.id === '') {
+      this.emplyServ.add(this.emply).then(rs => {});
+
+    } else {
+      this.emplyServ.edit(this.emply).then(rs => { console.log(rs)});
+    }
+
+    this.newEmply();
+  }
+
+  removeEmployee() {
+    if(confirm("ต้องการที่จะลบข้อมูลพนักงานหรือไม่?")) {
+
+    }
+  }
+
+}
