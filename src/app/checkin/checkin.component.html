@@ -1,7 +1,7 @@
-<div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-qrcode.jpg'); background-size: cover;">
+<div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-qrcode.jpg'); background-size: 100% 100%;">
     <form #qr="ngForm" (ngSubmit)="checkQRCode(qr)">
-        <input type="text" class="text-qrcode" name="textcode" ngModel #textcode>
+        <input type="text" class="text-qrcode" title="textcode" name="textcode" ngModel #textcode>
     </form>
 
-    <img src="../../assets/imgs/bttn-search.png" id="bttn-search">
+    <img src="../../assets/imgs/bttn-search.png" id="bttn-search" (click)="search()">
 </div>

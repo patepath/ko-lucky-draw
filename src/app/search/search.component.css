@@ -1,0 +1,13 @@
+#bttn-ok {
+    position: fixed;
+    top: 85%;
+    width: 25vw;
+    left: 24vw;
+}
+
+#bttn-cancel {
+    position: fixed;
+    top: 85%;
+    width: 25vw;
+    left: 51vw;
+}
