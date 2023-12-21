@@ -1,13 +1,12 @@
-#bttn-ok {
-    position: fixed;
-    top: 85%;
-    width: 25vw;
-    left: 24vw;
+table, th, td {
+    border: solid thin gray;
+    background-color: bisque;
+    padding: 0.5em;
 }
 
 #bttn-cancel {
     position: fixed;
     top: 85%;
     width: 25vw;
-    left: 51vw;
+    left: 37.5vw;
 }

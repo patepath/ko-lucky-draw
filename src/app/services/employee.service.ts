@@ -11,11 +11,11 @@ export class EmployeeService {
   constructor(private _fs: Firestore) { }
 
   findAll(): Observable<Employee[]> {
-    let ref = collection(this._fs, 'Employees');
+    let ref = query(collection(this._fs, 'Employees') , orderBy('code'));
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
-   findById(id: string) {
+  findById(id: string) {
     return getDoc(doc(this._fs, 'Employees', id)) ;
   }
 

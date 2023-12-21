@@ -1,5 +1,31 @@
 <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-search.jpg'); background-size: 100% 100%;">
 
-    <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok">
+    <div style="position: fixed; top: 37vh; width: 100%; text-align: center;">
+        <form #frm="ngForm" (ngSubmit)="submit(frm)">
+            <input type="text" name="txtsearch" style="font-size: 18pt; width: 8em; text-align: center;" ngModel #txtsearch>
+        </form>
+    </div>
+
+    <div style="position: fixed; top: 45%; width: 100%; ">
+
+        <table style="width: 80%; margin-left: auto; margin-right: auto;">
+            <thead>
+                <tr>
+                    <th style="width: 5em; text-align: center;">รหัส</th>
+                    <th style="padding-left: 0.5em;">ชื่อนามสกุล</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for(empl of employees; track empl.id) {
+                    <tr (click)="choice(empl.id)">
+                        <td style="text-align: center;">{{empl.code}}</td>
+                        <td style="padding-left: 0.5em;">{{empl.fullName}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
     <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
 </div>
