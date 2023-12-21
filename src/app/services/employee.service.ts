@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDoc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Employee } from '../models/employee';
 
@@ -43,6 +43,11 @@ export class EmployeeService {
     }
 
     return updateDoc(emplyIns, updateData);
+  }
+
+  remove(emply: Employee) {
+    let ref = doc(this._fs, 'Employees', emply.id);
+    return deleteDoc(ref)
   }
 
   checkin(emply: Employee) {

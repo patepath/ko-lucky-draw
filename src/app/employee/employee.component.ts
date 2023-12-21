@@ -126,7 +126,7 @@ export class EmployeeComponent {
 
   removeEmployee() {
     if(confirm("ต้องการที่จะลบข้อมูลพนักงานหรือไม่?")) {
-
+      this.emplyServ.remove(this.emply).then(rs => {});
     }
   }
 
