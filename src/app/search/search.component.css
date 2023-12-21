@@ -5,8 +5,14 @@ table, th, td {
 }
 
 #bttn-cancel {
-    position: fixed;
-    top: 85%;
     width: 25vw;
-    left: 37.5vw;
+}
+
+#bttn-ok {
+    width: 25vw;
+}
+
+.lh {
+    background-color: gray;
+    color: white;
 }

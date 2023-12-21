@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Employee } from '../models/employee';
 import { EmployeeService } from '../services/employee.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-search',
   standalone: true,
@@ -15,6 +17,7 @@ import { EmployeeService } from '../services/employee.service';
 export class SearchComponent {
     public employee: Employee = <Employee>{};
     public employees: Employee[] = [];
+    public currid: string = '';
 
     constructor(
       private _emplySrv: EmployeeService,
@@ -37,7 +40,12 @@ export class SearchComponent {
     }
 
     choice(id: string) {
-     this._router.navigate(['/welcome'], {queryParams: { id: id}}) 
+      this.currid = id;
+    }
+
+    ok() {
+      $('#msg-err').modal('show');
+      //this._router.navigate(['/welcome'], {queryParams: { id: this.currid}}) 
     }
 
     cancel() {

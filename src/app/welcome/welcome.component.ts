@@ -13,6 +13,8 @@ import { Employee } from '../models/employee';
 export class WelcomeComponent {
 
   public employee: Employee = <Employee>{};
+  public firstName: string = '';
+  public lastName: string = '';
 
   constructor(
     private _emplySrv: EmployeeService,
@@ -28,6 +30,8 @@ export class WelcomeComponent {
       if(id) {
         this._emplySrv.findById(id).then(s => {
           this.employee = <Employee>s.data();
+          this.firstName = this.employee.fullName.split(' ')[0];
+          this.lastName = this.employee.fullName.split(' ')[1];
           this.employee.id = id;
         });
       }
@@ -36,7 +40,7 @@ export class WelcomeComponent {
 
   checkin() {
     this._emplySrv.checkin(this.employee).then(s => { }).finally(() => {
-      window.location.href = '/';
+      window.location.href = '/thankyou';
     });
   }
 

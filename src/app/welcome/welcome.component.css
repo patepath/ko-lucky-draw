@@ -1,13 +1,23 @@
 #bttn-ok {
-    position: fixed;
-    top: 85%;
     width: 25vw;
-    left: 24vw;
+    margin-left: 15vw;
 }
 
 #bttn-cancel {
-    position: fixed;
-    top: 85%;
     width: 25vw;
-    left: 51vw;
+    margin-right: 15vw;
+}
+
+.lb {
+    margin-top: 1.5em;
+    font-weight: bold;
+    font-size: 16;
+}
+
+.field {
+    width: 100%;
+    padding: 0.25em;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white;
 }

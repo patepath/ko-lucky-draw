@@ -1,9 +1,16 @@
 <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-welcome.jpg'); background-size: 100% 100%;">
 
-    <div style="position: fixed; width: 100%; top: 50%; text-align: center;">
-        <h1 style="color: darkolivegreen;">{{employee.fullName}}</h1>
+    <div style="position: fixed; width: 80vw; height: 44vh; top: 37vh; left: 10vw; background-color: rgba( 255, 255, 255, 0.9); border-radius: 1em; padding: 1em">
+        <div class="lb">ชื่อ</div>
+        <div class="field">{{firstName}}</div>
+        <div class="lb">นามสกุล</div>
+        <div class="field">{{lastName}}</div>
+        <div class="lb">รหัสพนักงาน</div>
+        <div class="field">{{employee.code}}</div>
     </div>
 
-    <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="checkin()">
-    <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
+    <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;" >
+        <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
+        <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="checkin()">
+    </div>
 </div>

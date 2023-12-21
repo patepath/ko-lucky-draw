@@ -2,13 +2,18 @@
 
     <div style="position: fixed; top: 37vh; width: 100%; text-align: center;">
         <form #frm="ngForm" (ngSubmit)="submit(frm)">
-            <input type="text" name="txtsearch" style="font-size: 18pt; width: 8em; text-align: center;" ngModel #txtsearch>
+            <input type="text" name="txtsearch" style="font-size: 18pt; width: 80vw; text-align: center; border-radius: 1em;" ngModel #txtsearch>
         </form>
     </div>
 
-    <div style="position: fixed; top: 45%; width: 100%; height: 10em;">
+    <div style="position: fixed; top: 44vh; width: 100vw; text-align: center;">
+        <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()" style="margin-right: 15vw;">
+        <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="ok()" style="margin-left: 15vw;">
+    </div>
 
-        <div style="width: 80%; height: 16em; margin-left: auto; margin-right: auto; border: solid think gray; overflow-y: auto;">
+    <div style="position: fixed; top: 50vh; width: 100vw; height: 10em;">
+
+        <div style="width: 80vw; height: 16em; margin-left: auto; margin-right: auto; border: solid think gray; overflow-y: auto;">
             <table style="width: 100%;">
                 <thead>
                     <tr>
@@ -19,9 +24,9 @@
 
                 <tbody>
                     @for(empl of employees; track empl.id) {
-                        <tr (click)="choice(empl.id)">
-                            <td style="text-align: center;">{{empl.code}}</td>
-                            <td style="padding-left: 0.5em;">{{empl.fullName}}</td>
+                        <tr (click)="choice(empl.id)" >
+                            <td style="text-align: center;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.code}}</td>
+                            <td style="padding-left: 0.5em;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.fullName}}</td>
                         </tr>
                     }
                 </tbody>
@@ -29,5 +34,21 @@
         </div>
     </div>
 
-    <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
+</div>
+
+<div class="modal fade" id="msg-err" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">คำเตือน</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>รายชื่อนี้ได้ลงทะเบียนเป็นที่เรียบร้อยแล้ว</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

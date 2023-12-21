@@ -4,6 +4,7 @@ import { PresentComponent } from './present/present.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SearchComponent } from './search/search.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 export const routes: Routes = [
     { path: 'employee', component: EmployeeComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'checkin', component: CheckinComponent },
     { path: 'welcome', component: WelcomeComponent },
     { path: 'search', component: SearchComponent },
+    { path: 'thankyou', component: ThankyouComponent },
     { path: '', redirectTo: 'checkin', pathMatch: 'full' },
 ];
