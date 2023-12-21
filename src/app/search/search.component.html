@@ -6,25 +6,27 @@
         </form>
     </div>
 
-    <div style="position: fixed; top: 45%; width: 100%; ">
+    <div style="position: fixed; top: 45%; width: 100%; height: 10em;">
 
-        <table style="width: 80%; margin-left: auto; margin-right: auto;">
-            <thead>
-                <tr>
-                    <th style="width: 5em; text-align: center;">รหัส</th>
-                    <th style="padding-left: 0.5em;">ชื่อนามสกุล</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @for(empl of employees; track empl.id) {
-                    <tr (click)="choice(empl.id)">
-                        <td style="text-align: center;">{{empl.code}}</td>
-                        <td style="padding-left: 0.5em;">{{empl.fullName}}</td>
+        <div style="width: 80%; height: 12em; margin-left: auto; margin-right: auto; border: solid think gray; overflow-y: auto;">
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="width: 5em; text-align: center;">รหัส</th>
+                        <th style="padding-left: 0.5em;">ชื่อนามสกุล</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @for(empl of employees; track empl.id) {
+                        <tr (click)="choice(empl.id)">
+                            <td style="text-align: center;">{{empl.code}}</td>
+                            <td style="padding-left: 0.5em;">{{empl.fullName}}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
