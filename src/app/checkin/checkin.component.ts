@@ -3,6 +3,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../services/employee.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-checkin',
   standalone: true,
@@ -26,18 +28,34 @@ export class CheckinComponent {
   }
 
   checkQRCode(qr: NgForm) {
-
-    this._emplySrv.findByCode(qr.value['textcode']).subscribe(s => {
+    this._emplySrv.findByCode(qr.value['textcode']).subscribe(async s => {
       if(s.length > 0) {
-        this._router.navigate(['/welcome'], { queryParams: { id: s[0].id}})
+        let check = await this._emplySrv.isCheckin(s[0])
+
+        if(!check) {
+          console.log('not register');
+          this._router.navigate(['/welcome'], { queryParams: { id: s[0].id}})
+
+        } else {
+          $('#msg-err').modal('show');
+        }        
+
       } else {
         alert('not found');
       }
     });
+
+    this.textcode.nativeElement.value = '';
+    this.textcode.nativeElement.focus();
   }
 
   search() {
     this._router.navigate(['/search'])
+  }
+
+  cancelMsg() {
+    this.textcode.nativeElement.value = '';
+    this.textcode.nativeElement.focus();
   }
 
 }

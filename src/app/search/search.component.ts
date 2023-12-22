@@ -15,7 +15,7 @@ declare var $:any;
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-    public employee: Employee = <Employee>{};
+    public employee: Employee | undefined = <Employee>{};
     public employees: Employee[] = [];
     public currid: string = '';
 
@@ -43,9 +43,18 @@ export class SearchComponent {
       this.currid = id;
     }
 
-    ok() {
-      $('#msg-err').modal('show');
-      //this._router.navigate(['/welcome'], {queryParams: { id: this.currid}}) 
+    async ok() {
+      this.employee = this.employees.find(s => s.id == this.currid)
+
+      if(this.employee) {
+        let check = await this._emplySrv.isCheckin(this.employee)
+
+        if(!check) {
+          this._router.navigate(['/welcome'], {queryParams: { id: this.currid}}) 
+        } else {
+          $('#msg-err').modal('show');
+        }
+      }
     }
 
     cancel() {

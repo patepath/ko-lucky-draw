@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Employee } from '../models/employee';
+import { and } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,14 @@ export class EmployeeService {
     let updateData = { isCheck: true };
 
     return updateDoc(emplyIns, updateData);
+  }
+
+  async isCheckin(emply: Employee): Promise<boolean> {
+    let ref = doc(this._fs, 'Employees', emply.id);
+    let snap = await getDoc(ref);
+    let employee = <Employee>snap.data();
+
+    return employee.isCheck;
   }
 
 }
