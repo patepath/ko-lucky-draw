@@ -51,7 +51,7 @@ export class EmployeeService {
     return deleteDoc(ref)
   }
 
-  checkin(emply: Employee) {
+  checkin(emply: Employee, type: number) {
     let emplyIns = doc(this._fs, 'Employees', emply.id);
     let updateData = { isCheck: true };
 

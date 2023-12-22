@@ -15,6 +15,7 @@ export class WelcomeComponent {
   public employee: Employee = <Employee>{};
   public firstName: string = '';
   public lastName: string = '';
+  public type: number = 1;
 
   constructor(
     private _emplySrv: EmployeeService,
@@ -39,7 +40,7 @@ export class WelcomeComponent {
   }
 
   checkin() {
-    this._emplySrv.checkin(this.employee).then(s => { }).finally(() => {
+    this._emplySrv.checkin(this.employee, this.type).then(s => { }).finally(() => {
       window.location.href = '/thankyou';
     });
   }

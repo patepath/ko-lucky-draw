@@ -3,5 +3,7 @@ export interface Employee {
     code: string;
     fullName: string;
     isCheck: boolean;
+    checkDate: string;
+    checkType: number;
     present: string;
 }
