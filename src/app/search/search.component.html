@@ -1,39 +1,38 @@
-<div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-search.jpg'); background-size: 100% 100%;">
+<div class="container-fluid" style="height: 100vh; border: solid thin red; background-image: url('../../assets/imgs/checkin-search.jpg'); background-size: 100vw 100vh; ">
 
-    <div style="position: fixed; top: 37vh; width: 100%; text-align: center;">
-        <form #frm="ngForm" (ngSubmit)="submit(frm)">
-            <input type="text" name="txtsearch" style="font-size: 18pt; width: 80vw; text-align: center; border-radius: 1em;" ngModel #txtsearch>
-        </form>
-    </div>
+  <div style="margin-top: 37vh; text-align: center;">
+    <form #frm="ngForm" (ngSubmit)="submit(frm)">
+        <input type="text" name="txtsearch" style="font-size: 18pt; width: 80vw; text-align: center; border-radius: 1em;" ngModel #txtsearch>
+    </form>
+  </div>
 
-    <div style="position: fixed; top: 44vh; width: 100vw; text-align: center;">
-        <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()" style="margin-right: 15vw;">
-        <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="ok()" style="margin-left: 15vw;">
-    </div>
+  <div style="margin-top: 1em; text-align: center;">
+      <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()" style="margin-right: 15vw;">
+      <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="ok()" style="margin-left: 15vw;">
+  </div>
 
-    <div style="position: fixed; top: 50vh; width: 100vw; height: 10em;">
+  <div style="margin-top: 1em; width: 100%; height: 10em;">
 
-        <div style="width: 80vw; height: 16em; margin-left: auto; margin-right: auto; border: solid think gray; overflow-y: auto;">
-            <table style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th style="width: 5em; text-align: center;">รหัส</th>
-                        <th style="padding-left: 0.5em;">ชื่อนามสกุล</th>
-                    </tr>
-                </thead>
+      <div style="width: 80vw; height: 16em; margin-left: auto; margin-right: auto; border: solid think gray; overflow-y: auto;">
+          <table style="width: 100%;">
+              <thead>
+                  <tr>
+                      <th style="width: 5em; text-align: center;">รหัส</th>
+                      <th style="padding-left: 0.5em;">ชื่อนามสกุล</th>
+                  </tr>
+              </thead>
 
-                <tbody>
-                    @for(empl of employees; track empl.id) {
-                        <tr (click)="choice(empl.id)" >
-                            <td style="text-align: center;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.code}}</td>
-                            <td style="padding-left: 0.5em;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.fullName}}</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+              <tbody>
+                  @for(empl of employees; track empl.id) {
+                      <tr (click)="choice(empl.id)" >
+                          <td style="text-align: center;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.code}}</td>
+                          <td style="padding-left: 0.5em;" [ngClass]="{ 'lh': empl.id == currid }">{{empl.fullName}}</td>
+                      </tr>
+                  }
+              </tbody>
+          </table>
+      </div>
+  </div>
 </div>
 
 <div class="modal fade" id="msg-err" tabindex="-1">

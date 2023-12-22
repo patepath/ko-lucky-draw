@@ -1,6 +1,6 @@
-<div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/checkin-welcome.jpg'); background-size: 100% 100%;">
+<div class="container-fluid" style="height: 100vh; border: solid thin red; background-image: url('../../assets/imgs/checkin-welcome.jpg'); background-size: 100vw 100vh;">
 
-    <div style="position: fixed; width: 80vw; height: 44vh; top: 37vh; left: 10vw; background-color: rgba( 255, 255, 255, 0.9); border-radius: 1em; padding: 1em">
+    <div style="width: 80%; height: 44vh; margin-top: 37vh; margin-right: auto; margin-left: auto; background-color: rgba( 255, 255, 255, 0.9); border-radius: 1em; padding: 1em">
         <div class="lb">ชื่อ</div>
         <div class="field">{{firstName}}</div>
         <div class="lb">นามสกุล</div>
@@ -9,7 +9,7 @@
         <div class="field">{{employee.code}}</div>
     </div>
 
-    <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;" >
+    <div style="margin-top: 1em; width: 100%; text-align: center;" >
         <img src="../../assets/imgs/bttn-cancel.png" id="bttn-cancel" (click)="cancel()">
         <img src="../../assets/imgs/bttn-ok.png" id="bttn-ok" (click)="checkin()">
     </div>

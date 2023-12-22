@@ -33,7 +33,6 @@ export class CheckinComponent {
         let check = await this._emplySrv.isCheckin(s[0])
 
         if(!check) {
-          console.log('not register');
           this._router.navigate(['/welcome'], { queryParams: { id: s[0].id}})
 
         } else {
