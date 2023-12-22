@@ -7,8 +7,8 @@
 }
 
 #bttn-search {
-    position: fixed;
-    top: 85%;
+    position: relative;
+    margin-top: 2em;
     width: 25vw;
     left: 37.5vw;
 }
