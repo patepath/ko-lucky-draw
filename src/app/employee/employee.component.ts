@@ -105,7 +105,7 @@ export class EmployeeComponent {
   }
 
   findAll() {
-    this.emplyServ.findAll().subscribe(s => {
+    this.emplyServ.findAll().pipe(first()).subscribe(s => {
       this.emplies = s;
       this.refresh();
     });
