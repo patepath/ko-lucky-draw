@@ -121,6 +121,7 @@ export class EmployeeComponent {
         await this.emplyServ.clearCheckin(emplys[i].id);
       }
 
+      this.findAll();
       alert('Finished...')
     });
 
@@ -136,6 +137,7 @@ export class EmployeeComponent {
         await this.emplyServ.clearLuckyDraw(emplys[i].id);
       }
 
+      this.findAll();
       alert('Finished...')
     });
 
