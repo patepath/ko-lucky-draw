@@ -27,6 +27,7 @@ export class WelcomeComponent {
   ngOnInit(): void {
     this._route.queryParams.subscribe(s => {
       let id = s['id'];
+      this.type = Number(s['type'])
 
       if(id) {
         this._emplySrv.findById(id).then(s => {

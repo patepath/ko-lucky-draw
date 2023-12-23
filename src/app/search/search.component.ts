@@ -50,7 +50,8 @@ export class SearchComponent {
         let check = await this._emplySrv.isCheckin(this.employee)
 
         if(!check) {
-          this._router.navigate(['/welcome'], {queryParams: { id: this.currid}}) 
+          this._router.navigate(['/welcome'], {queryParams: { id: this.currid, type: 2 } }) 
+
         } else {
           $('#msg-err').modal('show');
         }

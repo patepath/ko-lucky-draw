@@ -106,6 +106,10 @@ export class EmployeeComponent {
     });
   }
 
+  reset() { 
+    this.emplyServ.resetCheckin();
+  }
+
   newEmply() {
     this.emply = <Employee>{};
     this.emply.id = '';

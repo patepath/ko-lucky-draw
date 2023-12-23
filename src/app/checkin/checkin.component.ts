@@ -33,7 +33,7 @@ export class CheckinComponent {
         let check = await this._emplySrv.isCheckin(s[0])
 
         if(!check) {
-          this._router.navigate(['/welcome'], { queryParams: { id: s[0].id}})
+          this._router.navigate(['/welcome'], { queryParams: { id: s[0].id, type: 1 } })
 
         } else {
           $('#msg-err').modal('show');
