@@ -133,6 +133,14 @@ export class EmployeeComponent {
     this.emply.present = '';
   }
 
+  checkCheckin() {
+    if(this.emply.isCheck) {
+      this.emply.checkTime = new Date().toLocaleString();
+    } else {
+      this.emply.checkTime = '';
+    }
+  }
+
   saveEmployee() {
     if(this.emply.id === '') {
       this.emplyServ.add(this.emply).then(rs => {});

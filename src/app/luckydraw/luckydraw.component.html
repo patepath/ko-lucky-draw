@@ -11,21 +11,21 @@
         <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_random1.jpg'); background-size: 100vw;">
 
             <div style="position: fixed; top: 45vh; width: 100vw; text-align: center;">
-                <span style="font-weight: bold; font-size: 56pt; color: white;">ชื่อของรางวัล</span>
+                <span style="font-weight: bold; font-size: 30pt; color: white;">{{present.name}}</span>
             </div>
 
             <div style="position: fixed; top: 65vh; width: 100vw;">
-                <div style="width: 80vw; padding: 0.5em; margin-left: auto; margin-right: auto; text-align: center; font-weight: bold; font-size: 36pt; color: white; border: solid 1px white; border-radius: 1em;">ชื่อพนักงาน</div>
+                <div style="width: 80vw; padding: 0.5em; margin-left: auto; margin-right: auto; text-align: center; font-weight: bold; font-size: 36pt; color: white; border: solid 1px white; border-radius: 1em;">{{employee.fullName}}</div>
             </div>
 
             <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;">
-                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="page = 0">
+                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="cancel()">
 
-                @if(!isRandom) {
-                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="isRandom = true">
+                @if(isRandom || !isResult) {
+                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random()">
 
-                } @else {
-                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="page = 2">
+                } @else if(!isRandom) {
+                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="ok1()">
                 }
 
             </div>
@@ -76,7 +76,6 @@
                 } @else {
                     <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;">
                 }
-
             </div>
         </div>
     }

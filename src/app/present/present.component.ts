@@ -28,8 +28,8 @@ export class PresentComponent {
 
   constructor(private _presentSrv: PresentService) { 
     this.dataTable = {
-      headerRow: ['ชื่อของขวัญ', 'จำนวน' ],
-      footerRow: ['ชื่อของขวัญ', 'จำนวน' ],
+      headerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'เหลือ' ],
+      footerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'เหลือ' ],
       dataRows: [],
     };
     
@@ -50,7 +50,7 @@ export class PresentComponent {
 				searchPlaceholder: "Search records",
 			},
 			columnDefs: [ { 
-        targets: [1], width: '5em', className: 'text-center' } 
+        targets: [0, 2, 3], width: '5em', className: 'text-center' } 
       ],
       paging: true,
       pageLenght: 10,
@@ -85,8 +85,10 @@ export class PresentComponent {
     if(this.presents.length > 0) {
       this.presents.forEach(s => {
         this.data.push([
+          String(s.order),
           s.name,
           String(s.qty),
+          s.remain === undefined ? '' : String(s.remain),
         ]);
       });
 

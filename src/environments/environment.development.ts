@@ -1,5 +1,4 @@
 export const environment = {
-
     firebaseConfig:  {
         apiKey: "AIzaSyBOlbWQ08fBlg4qbpPgTyL6jCVzTEgSSBQ",
         authDomain: "testsite-b5ff4.firebaseapp.com",

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Present } from '../models/present';
+import { limit } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,9 @@ export class PresentService {
   edit(present: Present) {
     let presentIns = doc(this._fs, 'Presents', present.id);
     let updateData = {
+      order: Number(present.order),
       name: present.name,
-      qty: present.qty,
+      qty: Number(present.qty),
     }
 
     return updateDoc(presentIns, updateData);
@@ -33,6 +35,11 @@ export class PresentService {
   findAll(): Observable<Present[]> {
     let ref = query(collection(this._fs, 'Presents'), orderBy('name'));
     return collectionData(ref, { idField: 'id'}) as Observable<Present[]>;
+  }
+
+  pickPresent() {
+    let rs = query(collection(this._fs, 'Presents'), where('qty', '>', 0));
+    return collectionData(rs, { idField: 'id'}) as Observable<Present[]>;
   }
 
 }

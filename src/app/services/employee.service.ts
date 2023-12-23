@@ -30,8 +30,8 @@ export class EmployeeService {
     return collectionData(ref, { idField: 'id'}) as Observable<Employee[]>;
   } 
 
-  findAllCheckin(): Observable<Employee[]> {
-    let ref = query(collection(this._fs, 'Employees'), where('isCheck', '==', true));
+  findParticipants(): Observable<Employee[]> {
+    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '!=', true)) );
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
@@ -45,6 +45,7 @@ export class EmployeeService {
       code: emply.code,
       fullName: emply.fullName,
       isCheck: emply.isCheck,
+      checkTime: emply.checkTime,
       present: emply.present
     }
 
@@ -76,6 +77,12 @@ export class EmployeeService {
     let employee = <Employee>snap.data();
 
     return employee.isCheck;
+  }
+
+  setPresent(employee: Employee, present: string) {
+    let d = doc(this._fs, 'Employees', employee.id);
+    let updateData = { isDraw: true, present: present };
+    updateDoc(d, updateData);
   }
 
 }

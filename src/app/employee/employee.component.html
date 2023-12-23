@@ -20,7 +20,7 @@
 
         <div class="form-check-group ms-3 mt-5">
             <label></label>
-            <input type="checkbox" class="form-check-input" [(ngModel)]="emply.isCheck"> ลงทะเบียนแล้ว
+            <input type="checkbox" class="form-check-input" [(ngModel)]="emply.isCheck" (change)="checkCheckin()"> ลงทะเบียนแล้ว
         </div>
     </div>
 
@@ -32,12 +32,12 @@
 
         <div class="form-check-group ms-3 mt-5">
             <label></label>
-            <input type="checkbox" class="form-check-input"> จับของขวัญแล้ว
+            <input type="checkbox" class="form-check-input" [(ngModel)]="emply.isDraw"> จับของขวัญแล้ว
         </div>
 
         <div class="form-check-group ms-3 mt-5">
             <label></label>
-            <input type="checkbox" class="form-check-input"> สละสิทธิ์
+            <input type="checkbox" class="form-check-input" [(ngModel)]="emply.isCancel"> สละสิทธิ์
         </div>
     </div>
 

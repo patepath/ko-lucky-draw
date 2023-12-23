@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Employee } from '../models/employee';
 import { EmployeeService } from '../services/employee.service';
+import { first } from 'rxjs/operators';
 
 declare var $:any;
 
@@ -26,7 +27,7 @@ export class SearchComponent {
     }
 
     ngAfterViewInit(): void {
-      this._emplySrv.findAll().subscribe(s => {
+      this._emplySrv.findAll().pipe(first()).subscribe(s => {
         if(s.length > 0) {
           this.employees = s;
         }
