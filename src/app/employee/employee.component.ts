@@ -3,6 +3,7 @@ import { Employee } from '../models/employee';
 import { EmployeeService } from '../services/employee.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 declare var $:any;
 declare interface DataTable {
@@ -30,8 +31,8 @@ export class EmployeeComponent {
   constructor(private emplyServ: EmployeeService) {
 
     this.dataTable = {
-      headerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้' ],
-      footerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้' ],
+      headerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้', 'สละสิทธิ์' ],
+      footerRow: ['รหัส', 'ชื่อ-นามสกุล', 'ลงทะเบียน', 'ของขวัญที่ได้', 'สละสิทธิ์' ],
       dataRows: [],
     };
 
@@ -48,7 +49,10 @@ export class EmployeeComponent {
 		let table = $('#employee-table').DataTable({
 			dom: 'frtip',
 			responsive: true,
-			columnDefs: [ { targets: [0, 2], width: '5em', className: 'text-center' } ],
+			columnDefs: [ 
+        { targets: [0, 2, 4], width: '5em', className: 'text-center' },
+        { targets: [3], className: 'text-center' }
+      ],
 			language: {
 				search: "_INPUT_",
 				searchPlaceholder: "Search records",
@@ -88,8 +92,9 @@ export class EmployeeComponent {
         this.data.push([
           s.code, 
           s.fullName,
-          s.isCheck ? '/' : '',
-          s.present
+          s.checkTime == '' ? '' : s.checkTime.split(' ')[1],
+          s.present,
+          s.isCancel ? '/' : ''
         ]);
       });
 
@@ -107,7 +112,18 @@ export class EmployeeComponent {
   }
 
   reset() { 
-    this.emplyServ.resetCheckin();
+    let emplys: Employee[]= []; 
+
+    this.emplyServ.findAll().pipe(first()).subscribe(s =>{
+      emplys = <Employee[]>s;
+
+      for(let i=0; i < emplys.length; i++) {
+        this.emplyServ.resetCheckin(emplys[i].id);
+      }
+
+      alert('Finished...')
+    });
+
   }
 
   newEmply() {

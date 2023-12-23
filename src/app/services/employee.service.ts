@@ -30,6 +30,11 @@ export class EmployeeService {
     return collectionData(ref, { idField: 'id'}) as Observable<Employee[]>;
   } 
 
+  findAllCheckin(): Observable<Employee[]> {
+    let ref = query(collection(this._fs, 'Employees'), where('isCheck', '==', true));
+    return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
+  }
+
   add(emply: Employee) {
     return addDoc(collection(this._fs, 'Employees'), emply);
   }
@@ -51,16 +56,10 @@ export class EmployeeService {
     return deleteDoc(ref)
   }
 
-  resetCheckin() {
-    let updateData = { isCheck: false, checkType: 0, checkTime: '', present: ''};
-
-    this.findAll().subscribe(s => {
-      s.forEach(e => {
-        let emply = <Employee>e;
-        let ref = doc(this._fs, 'Employees', emply.id);
-        updateDoc(ref, updateData);
-      });
-    });
+  resetCheckin(id: string) {
+    let updateData = { isCheck: false, checkType: 0, checkTime: '', present: '', isDraw: false, isCancel: false };
+    let ref = doc(this._fs, 'Employees', id);
+    updateDoc(ref, updateData);
   }
 
   checkin(emply: Employee, type: number) {

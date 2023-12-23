@@ -5,5 +5,7 @@ export interface Employee {
     isCheck: boolean;
     checkTime: string;
     checkType: number;
+    isDraw: boolean;
     present: string;
+    isCancel: boolean;
 }
