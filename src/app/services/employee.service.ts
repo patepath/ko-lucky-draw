@@ -57,8 +57,15 @@ export class EmployeeService {
     await deleteDoc(ref)
   }
 
-  async resetCheckin(id: string) {
-    let updateData = { isCheck: false, checkType: 0, checkTime: '', present: '', isDraw: false, isCancel: false };
+  async clearCheckin(id: string) {
+    //let updateData = { isCheck: false, checkType: 0, checkTime: '', present: '', isDraw: false, isCancel: false };
+    let updateData = { isCheck: false, checkType: 0, checkTime: '' };
+    let ref = doc(this._fs, 'Employees', id);
+    await updateDoc(ref, updateData);
+  }
+
+  async clearLuckyDraw(id: string) {
+    let updateData = { present: '', isDraw: false, isCancel: false };
     let ref = doc(this._fs, 'Employees', id);
     await updateDoc(ref, updateData);
   }

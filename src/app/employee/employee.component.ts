@@ -111,14 +111,29 @@ export class EmployeeComponent {
     });
   }
 
-  async reset() { 
+  async clearCheckin() { 
     let emplys: Employee[]= []; 
 
     this.emplyServ.findAll().pipe(first()).subscribe(async s =>{
       emplys = <Employee[]>s;
 
       for(let i=0; i < emplys.length; i++) {
-        await this.emplyServ.resetCheckin(emplys[i].id);
+        await this.emplyServ.clearCheckin(emplys[i].id);
+      }
+
+      alert('Finished...')
+    });
+
+  }
+
+  async clearLuckyDraw() {
+    let emplys: Employee[]= []; 
+
+    this.emplyServ.findAll().pipe(first()).subscribe(async s =>{
+      emplys = <Employee[]>s;
+
+      for(let i=0; i < emplys.length; i++) {
+        await this.emplyServ.clearLuckyDraw(emplys[i].id);
       }
 
       alert('Finished...')

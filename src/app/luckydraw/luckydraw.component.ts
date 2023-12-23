@@ -48,13 +48,10 @@ export class LuckydrawComponent {
   refreshEmployees() {
     this._emplySrv.findParticipants().pipe(first()).subscribe(s => {
       this.employees = s;
-      console.log('list number: ' + this.employees.length);
     });
   }
 
   random() {
-    console.log(this.employees);
-
     if(this.employees.length > 1 && !this.isRandom) {
       this.isRandom = true;
       this.isResult = false;
