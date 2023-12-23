@@ -86,19 +86,15 @@ export class LuckydrawComponent {
     this.isResult = false;
     this.employee = <Employee>{};
     this.employee.fullName = '...';
-
   }
 
   ok1() {
     this._emplySrv.setPresent(this.employee, this.present.name);
 
-    if(this.employees.length == 1) {
-      this.employees = [];
-    } else {
+    setTimeout(()=>{
       this.refreshEmployees();
-    }
-
-    this.cancel();
+      this.cancel();
+    }, 500);
   }
 
 }

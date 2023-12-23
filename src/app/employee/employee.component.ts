@@ -111,14 +111,14 @@ export class EmployeeComponent {
     });
   }
 
-  reset() { 
+  async reset() { 
     let emplys: Employee[]= []; 
 
-    this.emplyServ.findAll().pipe(first()).subscribe(s =>{
+    this.emplyServ.findAll().pipe(first()).subscribe(async s =>{
       emplys = <Employee[]>s;
 
       for(let i=0; i < emplys.length; i++) {
-        this.emplyServ.resetCheckin(emplys[i].id);
+        await this.emplyServ.resetCheckin(emplys[i].id);
       }
 
       alert('Finished...')
@@ -136,25 +136,26 @@ export class EmployeeComponent {
   checkCheckin() {
     if(this.emply.isCheck) {
       this.emply.checkTime = new Date().toLocaleString();
+
     } else {
       this.emply.checkTime = '';
     }
   }
 
-  saveEmployee() {
+  async saveEmployee() {
     if(this.emply.id === '') {
-      this.emplyServ.add(this.emply).then(rs => {});
+      await this.emplyServ.add(this.emply);
 
     } else {
-      this.emplyServ.edit(this.emply).then(rs => { console.log(rs)});
+      await this.emplyServ.edit(this.emply);
     }
 
     this.newEmply();
   }
 
-  removeEmployee() {
+  async removeEmployee() {
     if(confirm("ต้องการที่จะลบข้อมูลพนักงานหรือไม่?")) {
-      this.emplyServ.remove(this.emply).then(rs => {});
+      await this.emplyServ.remove(this.emply);
     }
   }
 

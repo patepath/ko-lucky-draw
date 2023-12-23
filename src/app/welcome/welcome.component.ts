@@ -40,10 +40,10 @@ export class WelcomeComponent {
     });
   }
 
-  checkin() {
-    this._emplySrv.checkin(this.employee, this.type).then(s => { }).finally(() => {
-      window.location.href = '/thankyou';
-    });
+  async checkin() {
+    await this._emplySrv.checkin(this.employee, this.type);
+    //window.location.href = '/thankyou';
+    this._router.navigate(['/thankyou']);
   }
 
   cancel() {

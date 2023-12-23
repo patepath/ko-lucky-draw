@@ -35,11 +35,11 @@ export class EmployeeService {
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
-  add(emply: Employee) {
-    return addDoc(collection(this._fs, 'Employees'), emply);
+  async add(emply: Employee) {
+    await addDoc(collection(this._fs, 'Employees'), emply);
   }
 
-  edit(emply: Employee) {
+  async edit(emply: Employee) {
     let emplyIns = doc(this._fs, 'Employees', emply.id);
     let updateData = {
       code: emply.code,
@@ -49,26 +49,26 @@ export class EmployeeService {
       present: emply.present
     }
 
-    return updateDoc(emplyIns, updateData);
+    await updateDoc(emplyIns, updateData);
   }
 
-  remove(emply: Employee) {
+  async remove(emply: Employee) {
     let ref = doc(this._fs, 'Employees', emply.id);
-    return deleteDoc(ref)
+    await deleteDoc(ref)
   }
 
-  resetCheckin(id: string) {
+  async resetCheckin(id: string) {
     let updateData = { isCheck: false, checkType: 0, checkTime: '', present: '', isDraw: false, isCancel: false };
     let ref = doc(this._fs, 'Employees', id);
-    updateDoc(ref, updateData);
+    await updateDoc(ref, updateData);
   }
 
-  checkin(emply: Employee, type: number) {
+  async checkin(emply: Employee, type: number) {
     let now = new Date();
     let emplyIns = doc(this._fs, 'Employees', emply.id);
     let updateData = { isCheck: true, checkType: type, checkTime: now.toLocaleString() };
 
-    return updateDoc(emplyIns, updateData);
+    await updateDoc(emplyIns, updateData);
   }
 
   async isCheckin(emply: Employee): Promise<boolean> {
