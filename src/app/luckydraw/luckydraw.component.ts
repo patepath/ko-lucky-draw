@@ -33,8 +33,16 @@ export class LuckydrawComponent {
     this.employee.fullName = '...';
   }
 
-  setPage(page: number) {
-    this.page = page;
+  startLuckyDraw() {
+    this.page = 1;
+  }
+
+  checkPage() {
+    if(this.present.qty < 10) {
+      this.page = 1;
+    } else {
+      this.page = 2;
+    }
   }
 
   refreshPresent() {
@@ -42,6 +50,10 @@ export class LuckydrawComponent {
       this.presents = s;
       this.presents.sort((a,b) => a.order - b.order);
       this.present = this.presents[0];
+
+      if(this.page > 0) {
+        this.checkPage();
+      }
     });
   }
 
@@ -94,6 +106,8 @@ export class LuckydrawComponent {
       this.refreshEmployees();
       this.refreshPresent();
       this.cancel();
+
+      this.checkPage();
     }, 100);
   }
 
