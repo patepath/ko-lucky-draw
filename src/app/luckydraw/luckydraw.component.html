@@ -2,7 +2,7 @@
     @case(0) {
         <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_start.jpg'); background-size: 100vw 100vh;">
             <div style="position: fixed; top: 72vh; width: 100vw; text-align: center;">
-                <img src="../../assets/imgs/bttn-start.png" style="width: 25vw" (click)="startLuckyDraw()">
+                <img src="../../assets/imgs/bttn-start.png" style="width: 20em" (click)="startLuckyDraw()">
 
             </div>
         </div>
@@ -15,17 +15,17 @@
             </div>
 
             <div style="position: fixed; top: 60vh; width: 100vw;">
-                <div style="width: 80vw; padding: 0.5em; margin-left: auto; margin-right: auto; text-align: center; font-weight: bold; font-size: 36pt; color: white; border: solid 1px white; border-radius: 1em;">{{employee.fullName}}</div>
+                <div style="width: 20em; padding: 0.5em; margin-left: auto; margin-right: auto; text-align: center; font-weight: bold; font-size: 36pt; color: white; border: solid 1px white; border-radius: 1em;">{{employee.fullName}}</div>
             </div>
 
             <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;">
-                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="cancel1()">
+                <img src="../../assets/imgs/bttn-cancel.png" style="width: 10em; margin-right: 8em;" (click)="cancel1()">
 
                 @if(isRandom || !isResult) {
-                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random1()">
+                    <img src="../../assets/imgs/bttn-random.png" style="width: 10em; margin-left: 8em;" (click)="random1()">
 
                 } @else if(!isRandom) {
-                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="ok1()">
+                    <img src="../../assets/imgs/bttn-ok.png" style="width: 10em; margin-left: 8em;" (click)="ok1()">
                 }
 
             </div>
@@ -39,7 +39,7 @@
             </div>
 
             <div style="position: fixed; top: 47vh; width: 100vw;">
-                <div style="width: 80vw; margin-left: auto; margin-right: auto;">
+                <div style="width: 50em; margin-left: auto; margin-right: auto;">
                     <div class="d-flex flex-row">
                         <div class="col-6 text-center cell">{{participants[0].fullName}}</div>
                         <div class="col-6 text-center cell">{{participants[5].fullName}}</div>
@@ -64,14 +64,15 @@
             </div>
 
             <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;">
-                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="page = 0">
+                <img src="../../assets/imgs/bttn-cancel.png" style="width: 10em; margin-right: 8em;" (click)="cancel2()">
 
                 @if(isRandom || !isResult) {
-                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random2()">
+                    <img src="../../assets/imgs/bttn-random.png" style="width: 10em; margin-left: 8em;" (click)="random2()">
 
                 } @else if(!isRandom) {
-                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="ok2()">
+                    <img src="../../assets/imgs/bttn-ok.png" style="width: 10em; margin-left: 8em;" (click)="ok2()">
                 }
+
             </div>
         </div>
     }

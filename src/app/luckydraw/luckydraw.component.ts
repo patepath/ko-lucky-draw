@@ -62,6 +62,8 @@ export class LuckydrawComponent {
       if(this.page > 0) {
         this.checkPage();
       }
+
+      this.refreshEmployees();
     });
   }
 
@@ -69,7 +71,6 @@ export class LuckydrawComponent {
     this._emplySrv.findParticipants().pipe(first()).subscribe(s => {
       if(s.length>10) {
         this.employees = s.slice(0,10);
-        console.log(this.employees);
 
       } else {
         this.employees = [...s];
@@ -110,7 +111,7 @@ export class LuckydrawComponent {
     await this._prsntSrv.pick1(this.present);
 
     setTimeout(()=>{
-      this.refreshEmployees();
+      //this.refreshEmployees();
       this.refreshPresent();
       this.isResult = false;
       this.employee = <Employee>{};
@@ -167,7 +168,7 @@ export class LuckydrawComponent {
     await this._prsntSrv.pick2(this.present, p.length);
 
     setTimeout(()=>{
-      this.refreshEmployees();
+      //this.refreshEmployees();
       this.refreshPresent();
       this.isResult = false;
       this.participants = [];
@@ -183,7 +184,14 @@ export class LuckydrawComponent {
   }
 
   cancel2() {
+    this.isResult = false;
+    this.participants = [];
 
+    for(let i=0; i<10; i++) {
+      let p = <Employee>{};
+      p.fullName = "-";
+      this.participants.push(p);
+    }
   }
 
 }
