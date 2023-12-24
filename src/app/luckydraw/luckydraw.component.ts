@@ -30,8 +30,6 @@ export class LuckydrawComponent {
     private _emplySrv: EmployeeService) {}
 
   ngOnInit(): void {
-    this.refreshPresent();
-    this.refreshEmployees();
     this.employee.fullName = '...';
 
     for(let i=0; i<10; i++) {
@@ -43,6 +41,7 @@ export class LuckydrawComponent {
 
   startLuckyDraw() {
     this.page = 1;
+    this.refreshPresent();
   }
 
   checkPage() {
@@ -111,7 +110,6 @@ export class LuckydrawComponent {
     await this._prsntSrv.pick1(this.present);
 
     setTimeout(()=>{
-      //this.refreshEmployees();
       this.refreshPresent();
       this.isResult = false;
       this.employee = <Employee>{};
@@ -135,7 +133,7 @@ export class LuckydrawComponent {
       let len: number;
 
       let timer = setInterval(() => {
-        for(let i=this.employees.length-1; i > 0; i--) {
+        for(let i=this.employees.length-1; i >= 0; i--) {
           let inx = Math.floor(Math.random() * this.employees.length);
           [this.employees[i], this.employees[inx]] = [this.employees[inx], this.employees[i]];       
         }
@@ -168,7 +166,6 @@ export class LuckydrawComponent {
     await this._prsntSrv.pick2(this.present, p.length);
 
     setTimeout(()=>{
-      //this.refreshEmployees();
       this.refreshPresent();
       this.isResult = false;
       this.participants = [];
