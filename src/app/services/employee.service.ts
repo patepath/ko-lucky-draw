@@ -47,7 +47,9 @@ export class EmployeeService {
       fullName: emply.fullName,
       isCheck: emply.isCheck,
       checkTime: emply.checkTime,
-      present: emply.present
+      present: emply.present,
+      isDraw: emply.isDraw,
+      isCancel: emply.isCancel,
     }
 
     await updateDoc(emplyIns, updateData);

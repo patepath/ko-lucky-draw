@@ -36,8 +36,7 @@ export class EmployeeComponent {
       dataRows: [],
     };
 
-    this.emply.isCheck = false;
-    this.emply.present = '';
+    this.newEmply();
   }
 
   ngOnInit(): void {
@@ -126,6 +125,7 @@ export class EmployeeComponent {
   newEmply() {
     this.emply = <Employee>{};
     this.emply.id = '';
+    this.emply.fullName = '';
     this.emply.isCheck = false;
     this.emply.present = '';
   }
@@ -140,15 +140,20 @@ export class EmployeeComponent {
   }
 
   async saveEmployee() {
-    if(this.emply.id === '') {
-      await this.emplyServ.add(this.emply);
+    if(this.emply.fullName !== '') {
+      if(this.emply.id === '' ) {
+        await this.emplyServ.add(this.emply);
+
+      } else {
+        await this.emplyServ.edit(this.emply);
+      }
+
+      this.newEmply();
+      this.findAll();
 
     } else {
-      await this.emplyServ.edit(this.emply);
+      alert('ไม่สามารถบันทึกข้อมูล!');
     }
-
-    this.newEmply();
-    this.findAll();
   }
 
   async removeEmployee() {

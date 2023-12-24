@@ -182,6 +182,13 @@ export class LuckydrawComponent {
 
   cancel2() {
     this.isResult = false;
+    
+    this.participants.forEach(async s => {
+      if(s.id != undefined) {
+        await this._emplySrv.cancelPresent(s, this.present);
+      }
+    });
+
     this.participants = [];
 
     for(let i=0; i<10; i++) {
@@ -189,6 +196,8 @@ export class LuckydrawComponent {
       p.fullName = "-";
       this.participants.push(p);
     }
+
+    this.refreshPresent();
   }
 
 }
