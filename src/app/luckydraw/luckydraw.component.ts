@@ -67,7 +67,13 @@ export class LuckydrawComponent {
 
   refreshEmployees() {
     this._emplySrv.findParticipants().pipe(first()).subscribe(s => {
-      this.employees = s;
+      if(s.length>10) {
+        this.employees = s.slice(0,10);
+        console.log(this.employees);
+
+      } else {
+        this.employees = [...s];
+      }
     });
   }
 
@@ -122,39 +128,58 @@ export class LuckydrawComponent {
   }
 
   random2() {
-    this.isRandom = true;
-    this.isResult = false;
+    if(this.employees.length > 1 && !this.isRandom) {
+      this.isRandom = true;
+      this.isResult = false;
+      let len: number;
 
-    let timer = setInterval(() => {
-      for(let i=this.employees.length-1; i > 0; i--) {
-        let inx = Math.floor(Math.random() * this.employees.length);
-        [this.employees[i], this.employees[inx]] = [this.employees[inx], this.employees[i]];       
-      }
+      let timer = setInterval(() => {
+        for(let i=this.employees.length-1; i > 0; i--) {
+          let inx = Math.floor(Math.random() * this.employees.length);
+          [this.employees[i], this.employees[inx]] = [this.employees[inx], this.employees[i]];       
+        }
 
-      this.participants = [...this.employees];
-      let len = this.participants.length;
+        this.participants = [...this.employees];
+        len = this.participants.length;
 
-      for(let i=len; i<10; i++) {
+        for(let i=len; i<10; i++) {
+          let p = <Employee>{};
+          p.fullName = "-";
+          this.participants.push(p);
+        }
+      }, 80);
+      
+      setTimeout(() => {
+        clearInterval(timer);
+          this.isRandom = false;
+          this.isResult = true;
+
+      }, 3000);
+
+    } else {
+      alert('ไม่มีรายชื่อผู้ร่วมงานที่สามารถจับรางวัลได้')
+    }
+  }
+
+  async ok2() {
+    let p = this.participants.filter(s => s.fullName != "-");
+    await this._emplySrv.givePresent2(p, this.present.name);
+    await this._prsntSrv.pick2(this.present, p.length);
+
+    setTimeout(()=>{
+      this.refreshEmployees();
+      this.refreshPresent();
+      this.isResult = false;
+      this.participants = [];
+
+      for(let i=0; i<10; i++) {
         let p = <Employee>{};
         p.fullName = "-";
         this.participants.push(p);
       }
-    }, 80);
-    
-    setTimeout(() => {
-      clearInterval(timer);
-        this.isRandom = false;
-        this.isResult = true;
-        this._emplySrv.givePresent2(this.employees, this.present.name);
 
-    }, 3000);
-  }
-
-  ok2() {
-    let p = this.participants.filter(s => s.fullName != "-");
-
-
-
+      this.checkPage();
+    }, 100);
   }
 
   cancel2() {

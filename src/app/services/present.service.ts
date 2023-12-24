@@ -73,6 +73,27 @@ export class PresentService {
     await updateDoc(ref, updateData);
   }
 
-  
+  async pick2(present: Present, num: number) {
+
+    let ref = doc(this._fs, 'Presents', present.id);
+    let snap = await getDoc(ref);
+    let p = <Present>snap.data(); 
+
+    if(p.qty - (p.give+num) <= 0) {
+      p.give = p.qty;
+      p.isEmpty = true;
+
+    } else {
+      p.give = p.give + num;
+      p.isEmpty = false;
+    }
+
+    let updateData = {
+      give: p.give, 
+      isEmpty: p.isEmpty
+    }
+
+    await updateDoc(ref, updateData);
+  }
 
 }

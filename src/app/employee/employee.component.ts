@@ -148,6 +148,7 @@ export class EmployeeComponent {
     }
 
     this.newEmply();
+    this.findAll();
   }
 
   async removeEmployee() {
