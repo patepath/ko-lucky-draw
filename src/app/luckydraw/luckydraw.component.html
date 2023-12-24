@@ -1,6 +1,6 @@
 @switch(page) {
     @case(0) {
-        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_start.jpg'); background-size: 100vw;">
+        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_start.jpg'); background-size: 100vw 100vh;">
             <div style="position: fixed; top: 72vh; width: 100vw; text-align: center;">
                 <img src="../../assets/imgs/bttn-start.png" style="width: 25vw" (click)="page = 1">
 
@@ -8,13 +8,13 @@
         </div>
 
     } @case(1) {
-        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_random1.jpg'); background-size: 100vw;">
+        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_random1.jpg'); background-size: 100vw 100vh;">
 
-            <div style="position: fixed; top: 45vh; width: 100vw; text-align: center;">
-                <span style="font-weight: bold; font-size: 30pt; color: white;">{{present.name}}</span>
+            <div style="position: fixed; top: 47vh; width: 100vw; text-align: center;">
+                <span style="font-weight: bold; font-size: 42pt; color: white;">{{present.name}}</span>
             </div>
 
-            <div style="position: fixed; top: 65vh; width: 100vw;">
+            <div style="position: fixed; top: 60vh; width: 100vw;">
                 <div style="width: 80vw; padding: 0.5em; margin-left: auto; margin-right: auto; text-align: center; font-weight: bold; font-size: 36pt; color: white; border: solid 1px white; border-radius: 1em;">{{employee.fullName}}</div>
             </div>
 
@@ -32,7 +32,7 @@
         </div>
 
     } @case(2) {
-        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_random2.jpg'); background-size: 100vw;">
+        <div style="width: 100vw; height: 100vh; align-items: center; background-image: url('../../assets/imgs/luckydraw_random2.jpg'); background-size: 100vw 100vh;">
 
             <div style="position: fixed; top: 35vh; width: 100vw; text-align: center;">
                 <span style="font-weight: bold; font-size: 56pt; color: white;">ชื่อของรางวัล</span>

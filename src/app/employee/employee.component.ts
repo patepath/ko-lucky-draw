@@ -112,35 +112,15 @@ export class EmployeeComponent {
   }
 
   async clearCheckin() { 
-    let emplys: Employee[]= []; 
-
-    this.emplyServ.findAll().pipe(first()).subscribe(async s =>{
-      emplys = <Employee[]>s;
-
-      for(let i=0; i < emplys.length; i++) {
-        await this.emplyServ.clearCheckin(emplys[i].id);
-      }
-
-      this.findAll();
-      alert('Finished...')
-    });
-
+    await this.emplyServ.clearCheckin();
+    this.findAll();
+    alert('Finished...');
   }
 
   async clearLuckyDraw() {
-    let emplys: Employee[]= []; 
-
-    this.emplyServ.findAll().pipe(first()).subscribe(async s =>{
-      emplys = <Employee[]>s;
-
-      for(let i=0; i < emplys.length; i++) {
-        await this.emplyServ.clearLuckyDraw(emplys[i].id);
-      }
-
-      this.findAll();
-      alert('Finished...')
-    });
-
+    await this.emplyServ.clearLuckyDraw();
+    this.findAll();
+    alert('Finished...')
   }
 
   newEmply() {
@@ -175,5 +155,4 @@ export class EmployeeComponent {
       await this.emplyServ.remove(this.emply);
     }
   }
-
 }

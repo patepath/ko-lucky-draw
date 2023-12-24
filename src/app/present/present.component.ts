@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Present } from '../models/present';
 import { PresentService } from '../services/present.service';
+import { first } from 'rxjs/operators';
 
 declare var $:any;
 declare interface DataTable {
@@ -28,8 +29,8 @@ export class PresentComponent {
 
   constructor(private _presentSrv: PresentService) { 
     this.dataTable = {
-      headerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'เหลือ' ],
-      footerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'เหลือ' ],
+      headerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'แจกไป' ],
+      footerRow: ['ลำดับที่', 'ชื่อของขวัญ', 'จำนวน', 'แจกไป' ],
       dataRows: [],
     };
     
@@ -88,7 +89,7 @@ export class PresentComponent {
           String(s.order),
           s.name,
           String(s.qty),
-          s.remain === undefined ? '' : String(s.remain),
+          s.give === undefined ? '' : String(s.give),
         ]);
       });
 
@@ -99,7 +100,7 @@ export class PresentComponent {
   }
 
   findAll() {
-    this._presentSrv.findAll().subscribe(s => {
+    this._presentSrv.findAll().pipe(first()).subscribe(s => {
       this.presents = s;
       this.refresh();
     });
@@ -110,27 +111,31 @@ export class PresentComponent {
     this.present.id = '';
   }
 
-  savePresent() {
+  async savePresent() {
     if(this.present.id == '') {
-      this._presentSrv.add(this.present).then(rs => {
-        this.newPresent();
-      });
+      await this._presentSrv.add(this.present);
+      this.newPresent();
 
     } else {
-      this._presentSrv.edit(this.present).then(rs => { 
-        this.newPresent();
-      });
+      this.present.isEmpty = this.present.qty <= this.present.give
+      await this._presentSrv.edit(this.present);
+      this.newPresent();
     }
 
+    this.findAll();
+  }
+
+  async clearLuckyDraw() {
+    await this._presentSrv.clearLuckyDraw();
+    this.findAll();
+    alert('Finished...');
   }
  
-  removePresent() {
-
+  async removePresent() {
     if(this.present.id != '') {
       if(confirm("ต้องการที่จะลบข้อมูลของขวัญหรือไม่?")) {
-        this._presentSrv.remove(this.present).then(rs => {
-          this.newPresent();
-        }) 
+        await this._presentSrv.remove(this.present);
+        this.newPresent();
       }
     }
   }

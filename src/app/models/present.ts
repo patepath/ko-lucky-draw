@@ -3,5 +3,6 @@ export interface Present {
     order: number;
     name: string;
     qty: number;
-    remain: number;
+    give: number;
+    isEmpty: boolean;
 }

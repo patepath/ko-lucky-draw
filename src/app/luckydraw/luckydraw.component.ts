@@ -28,7 +28,7 @@ export class LuckydrawComponent {
     private _emplySrv: EmployeeService) {}
 
   ngOnInit(): void {
-    this.pickPresent();
+    this.refreshPresent();
     this.refreshEmployees();
     this.employee.fullName = '...';
   }
@@ -37,8 +37,8 @@ export class LuckydrawComponent {
     this.page = page;
   }
 
-  pickPresent() {
-    this._prsntSrv.pickPresent().pipe(first()).subscribe(s => {
+  refreshPresent() {
+    this._prsntSrv.findDrawable().pipe(first()).subscribe(s => {
       this.presents = s;
       this.presents.sort((a,b) => a.order - b.order);
       this.present = this.presents[0];
@@ -59,7 +59,7 @@ export class LuckydrawComponent {
       let timer = setInterval(() => {
         let inx = Math.floor(Math.random() * this.employees.length)
         this.employee = this.employees[inx];
-      }, 20);
+      }, 30);
 
       setTimeout(() => { 
         clearInterval(timer);
@@ -79,19 +79,22 @@ export class LuckydrawComponent {
     }
   }
 
-  cancel() {
+  async cancel() {
+    await this._emplySrv.cancelPresent(this.employee, this.present);
     this.isResult = false;
     this.employee = <Employee>{};
     this.employee.fullName = '...';
   }
 
-  ok1() {
-    this._emplySrv.setPresent(this.employee, this.present.name);
+  async ok1() {
+    await this._emplySrv.givePresent(this.employee, this.present.name);
+    await this._prsntSrv.pick1(this.present);
 
     setTimeout(()=>{
       this.refreshEmployees();
+      this.refreshPresent();
       this.cancel();
-    }, 500);
+    }, 100);
   }
 
 }

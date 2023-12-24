@@ -3,6 +3,7 @@ import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, 
 import { Observable } from 'rxjs';
 import { Employee } from '../models/employee';
 import { and, getDocs, getFirestore } from 'firebase/firestore';
+import { Present } from '../models/present';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class EmployeeService {
   } 
 
   findParticipants(): Observable<Employee[]> {
-    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '!=', true)) );
+    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '!=', true), where('isCancel', '==', false)) );
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
@@ -57,17 +58,24 @@ export class EmployeeService {
     await deleteDoc(ref)
   }
 
-  async clearCheckin(id: string) {
-    //let updateData = { isCheck: false, checkType: 0, checkTime: '', present: '', isDraw: false, isCancel: false };
+  async clearCheckin() {
     let updateData = { isCheck: false, checkType: 0, checkTime: '' };
-    let ref = doc(this._fs, 'Employees', id);
-    await updateDoc(ref, updateData);
+    let ref = collection(this._fs, 'Employees');
+    let snap = await getDocs(ref);
+
+    snap.forEach(async s => {
+      await updateDoc(doc(this._fs, 'Employees', s.id), updateData);
+    });
   }
 
-  async clearLuckyDraw(id: string) {
-    let updateData = { present: '', isDraw: false, isCancel: false };
-    let ref = doc(this._fs, 'Employees', id);
-    await updateDoc(ref, updateData);
+  async clearLuckyDraw() {
+    let updateEmployee = { present: '', isDraw: false, isCancel: false };
+    let ref = collection(this._fs, 'Employees');
+    let snap = await getDocs(ref);
+
+    snap.forEach(async s => {
+      await updateDoc(doc(this._fs, 'Employees', s.id), updateEmployee);
+    });
   }
 
   async checkin(emply: Employee, type: number) {
@@ -86,10 +94,13 @@ export class EmployeeService {
     return employee.isCheck;
   }
 
-  setPresent(employee: Employee, present: string) {
+  async givePresent(employee: Employee, present: string) {
     let d = doc(this._fs, 'Employees', employee.id);
     let updateData = { isDraw: true, present: present };
-    updateDoc(d, updateData);
+    await updateDoc(d, updateData);
   }
 
+  async cancelPresent(employee: Employee, present: Present) {
+    updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
+  }
 }
