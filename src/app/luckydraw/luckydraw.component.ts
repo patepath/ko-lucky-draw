@@ -93,7 +93,7 @@ export class LuckydrawComponent {
         this.isResult = true;
 
         this.page = 1; 
-      }, 4000)
+      }, 6000)
 
     } else if(this.employees.length == 1) {
         this.isRandom = false;
@@ -154,7 +154,7 @@ export class LuckydrawComponent {
           this.isRandom = false;
           this.isResult = true;
 
-      }, 3000);
+      }, 6000);
 
     } else {
       alert('ไม่มีรายชื่อผู้ร่วมงานที่สามารถจับรางวัลได้')
