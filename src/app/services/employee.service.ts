@@ -94,13 +94,23 @@ export class EmployeeService {
     return employee.isCheck;
   }
 
-  async givePresent(employee: Employee, present: string) {
+  async givePresent1(employee: Employee, present: string) {
     let d = doc(this._fs, 'Employees', employee.id);
-    let updateData = { isDraw: true, present: present };
+    let updateData = { isDraw: true, isCancel: false, present: present };
     await updateDoc(d, updateData);
   }
 
   async cancelPresent(employee: Employee, present: Present) {
     updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
+  }
+
+  async givePresent2(employees: Employee[], present: string) {
+    let updateData = { isDraw: true, isCancel: false, present: present };
+
+    employees.forEach(async emply => {
+      let ref = doc(this._fs, 'Employees', emply.id);
+      await updateDoc(ref, updateData);
+    });
+
   }
 }

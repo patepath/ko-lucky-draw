@@ -19,10 +19,10 @@
             </div>
 
             <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;">
-                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="cancel()">
+                <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="cancel1()">
 
                 @if(isRandom || !isResult) {
-                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random()">
+                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random1()">
 
                 } @else if(!isRandom) {
                     <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="ok1()">
@@ -41,28 +41,24 @@
             <div style="position: fixed; top: 47vh; width: 100vw;">
                 <div style="width: 80vw; margin-left: auto; margin-right: auto;">
                     <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
+                        <div class="col-6 text-center cell">{{participants[0].fullName}}</div>
+                        <div class="col-6 text-center cell">{{participants[5].fullName}}</div>
                     </div>
                     <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
+                        <div class="col-6 text-center cell">{{participants[1].fullName}}</div>
+                        <div class="col-6 text-center cell">{{participants[6].fullName}}</div>
                     </div>
                     <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
+                        <div class="col-6 text-center cell">{{participants[2].fullName}}</div>
+                        <div class="col-6 text-center cell">{{participants[7].fullName}}</div>
                     </div>
                     <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
+                        <div class="col-6 text-center cell">{{participants[3].fullName}}</div>
+                        <div class="col-6 text-center cell">{{participants[8].fullName}}</div>
                     </div>
                     <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                    </div>
-                    <div class="d-flex flex-row">
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
-                        <div class="col-6 text-center cell">ชื่อพนักงาน</div>
+                        <div class="col-6 text-center cell">{{participants[4].fullName}}</div>
+                        <div class="col-6 text-center cell">{{participants[9].fullName}}</div>
                     </div>
                 </div>
             </div>
@@ -70,11 +66,11 @@
             <div style="position: fixed; top: 85vh; width: 100vw; text-align: center;">
                 <img src="../../assets/imgs/bttn-cancel.png" style="width: 15vw; margin-right: 25vw;" (click)="page = 0">
 
-                @if(!isRandom) {
-                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="isRandom = true">
+                @if(isRandom || !isResult) {
+                    <img src="../../assets/imgs/bttn-random.png" style="width: 15vw; margin-left: 25vw;" (click)="random2()">
 
-                } @else {
-                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;">
+                } @else if(!isRandom) {
+                    <img src="../../assets/imgs/bttn-ok.png" style="width: 15vw; margin-left: 25vw;" (click)="ok2()">
                 }
             </div>
         </div>
