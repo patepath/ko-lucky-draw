@@ -34,7 +34,7 @@ export class PresentComponent {
       dataRows: [],
     };
     
-    this.present.id = '';
+    this.newPresent();
   }
 
   ngOnInit(): void {
@@ -109,20 +109,34 @@ export class PresentComponent {
   newPresent() {
     this.present = <Present>{};
     this.present.id = '';
+    this.present.order = 0;
+    this.present.name = '';
+    this.present.qty = 0;
+    this.present.give = 0;
+    this.present.isEmpty = false;
   }
 
   async savePresent() {
-    if(this.present.id == '') {
-      await this._presentSrv.add(this.present);
-      this.newPresent();
+    if(this.present.name != '') {
 
-    } else {
-      this.present.isEmpty = this.present.qty <= this.present.give
-      await this._presentSrv.edit(this.present);
-      this.newPresent();
+      if(this.present.qty > this.present.give) {
+        this.present.isEmpty = false;
+      } else {
+        this.present.isEmpty = true;
+      }
+
+      if(this.present.id == '') {
+        await this._presentSrv.add(this.present);
+        this.newPresent();
+
+      } else {
+        this.present.isEmpty = this.present.qty <= this.present.give
+        await this._presentSrv.edit(this.present);
+        this.newPresent();
+      }
+
+      this.findAll();
     }
-
-    this.findAll();
   }
 
   async clearLuckyDraw() {

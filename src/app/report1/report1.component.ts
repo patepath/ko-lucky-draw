@@ -79,8 +79,6 @@ export class Report1Component {
 		let table = $('#report1-table').DataTable();
 		table.clear();
     this.data = [];
-
-    console.log(this.emplies);
   
     if(this.emplies.length > 0) {
       this.emplies.forEach(s => {
