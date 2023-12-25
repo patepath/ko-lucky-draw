@@ -199,6 +199,6 @@ export class LuckydrawComponent {
       }
 
       this.refreshPresent();
-    }, 100);
+    }, 300);
   }
 }
