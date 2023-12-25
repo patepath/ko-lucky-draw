@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { HostListener, Component } from '@angular/core';
 import { Present } from '../models/present';
 import { PresentService } from '../services/present.service';
 import { first } from 'rxjs';
@@ -36,6 +36,39 @@ export class LuckydrawComponent {
       let p = <Employee>{};
       p.fullName = "-";
       this.participants.push(p);
+    }
+  }
+
+  @HostListener('window:keyup',['$event'])
+  handleKeyUp(event: KeyboardEvent) {
+
+    if(this.page == 0 && event.code == 'KeyS') {
+      this.startLuckyDraw();
+    }
+
+    if(this.page == 1 && event.code == 'KeyR') {
+      this.random1();
+    }
+
+    if(this.page == 1 && event.code == 'KeyC') {
+      this.cancel1();
+    }
+
+    if(this.page == 1 && event.code == 'KeyK') {
+      this.ok1();
+    }
+
+    //------------------------------------------
+    if(this.page == 2 && event.code == 'KeyR') {
+      this.random2();
+    }
+
+    if(this.page == 2 && event.code == 'KeyC') {
+      this.cancel2();
+    }
+
+    if(this.page == 2 && event.code == 'KeyK') {
+      this.ok2();
     }
   }
 
