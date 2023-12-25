@@ -85,10 +85,10 @@ export class Report1Component {
     if(this.emplies.length > 0) {
       this.emplies.forEach(s => {
         this.data.push([
-          s.code, 
-          s.fullName,
-          s.checkType == 1 ? 'QR Code' : 'Search',
-          s.checkTime.split(' ')[1],
+          s.code == undefined ? '' : s.code, 
+          s.code == undefined ? '' : s.fullName,
+          s.checkType == undefined ? '' : s.checkType == 1 ? 'QR Code' : 'Search',
+          s.checkTime == undefined  || s.checkTime == '' ? '' : s.checkTime.split(' ')[1],
           s.present,
           s.isCancel ? 'สละสิทธิ์' : ''
         ]);
