@@ -91,7 +91,7 @@ export class EmployeeComponent {
         this.data.push([
           s.code, 
           s.fullName,
-          s.checkTime == '' ? '' : s.checkTime.split(' ')[1],
+          s.checkTime === undefined || s.checkTime == '' ? '' : s.checkTime.split(' ')[1],
           s.present,
           s.isCancel ? '/' : ''
         ]);
@@ -127,6 +127,9 @@ export class EmployeeComponent {
     this.emply.id = '';
     this.emply.fullName = '';
     this.emply.isCheck = false;
+    this.emply.checkTime = '';
+    this.emply.isDraw = false;
+    this.emply.isCancel = false;
     this.emply.present = '';
   }
 
@@ -142,6 +145,7 @@ export class EmployeeComponent {
   async saveEmployee() {
     if(this.emply.fullName !== '') {
       if(this.emply.id === '' ) {
+        console.log('new');
         await this.emplyServ.add(this.emply);
 
       } else {
