@@ -1,0 +1,42 @@
+<div class="container">
+    <h1 class="mt-3">รายงานคนลงทะเบียน</h1>
+    <hr>
+
+    <div class="d-flex flex-wrap mt-3">
+        <div class="col-auto card">
+            <div class="card-body">
+                <h5 class="card-title">จำนวนคนที่มาลงทะเบียนทั้งหมด</h5>
+                <p class="card-text text-center">
+                   {{totalAmount}} 
+                </p>
+            </div>
+        </div>
+
+        <div class="col-auto card ms-2">
+            <div class="card-body">
+                <h5 class="card-title">จำนวนคนที่มาสแกนคิวอาร์โค้ด</h5>
+                <p class="card-text text-center">
+                   {{qrcodeAmount}} 
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <table id="report1-table" class="table table-bordered table-responsive" [width]="'100%'">
+            <thead>
+                <tr>
+                    @for(head of dataTable.headerRow; track head) {
+                        <th>{{head}}</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @for( data of dataTable.dataRows; track data) {
+                    <tr>{{data}}</tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

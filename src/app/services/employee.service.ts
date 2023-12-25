@@ -32,7 +32,7 @@ export class EmployeeService {
   } 
 
   findParticipants(): Observable<Employee[]> {
-    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '!=', true), where('isCancel', '==', false)) );
+    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '==', false)) );
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
@@ -103,7 +103,7 @@ export class EmployeeService {
   }
 
   async cancelPresent(employee: Employee, present: Present) {
-    updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
+    await updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
   }
 
   async givePresent2(employees: Employee[], present: string) {
