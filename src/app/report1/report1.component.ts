@@ -63,6 +63,15 @@ export class Report1Component {
 			pagingType: "full_numbers",
 		});
 
+    table.on('mouseover', 'tr', function(this: any) {
+      $(this).css('cursor', 'pointer');
+			$(this).css('font-weight', 'bold');
+    })
+
+    table.on('mouseout', 'tr', function(this: any) {
+			$(this).css('font-weight', 'normal');
+    })
+
     self.getParticipants();
   }
 
