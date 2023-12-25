@@ -189,15 +189,16 @@ export class LuckydrawComponent {
       }
     });
 
-    this.participants = [];
+    setTimeout(() => {
+      this.participants = [];
 
-    for(let i=0; i<10; i++) {
-      let p = <Employee>{};
-      p.fullName = "-";
-      this.participants.push(p);
-    }
+      for(let i=0; i<10; i++) {
+        let p = <Employee>{};
+        p.fullName = "-";
+        this.participants.push(p);
+      }
 
-    this.refreshPresent();
+      this.refreshPresent();
+    }, 100);
   }
-
 }
