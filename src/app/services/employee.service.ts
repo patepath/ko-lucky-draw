@@ -103,7 +103,7 @@ export class EmployeeService {
   }
 
   async cancelPresent(employee: Employee, present: Present) {
-    updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
+    await updateDoc(doc(this._fs, 'Employees', employee.id), { isDraw: true, present: present.name, isCancel: true });
   }
 
   async givePresent2(employees: Employee[], present: string) {
