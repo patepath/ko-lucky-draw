@@ -32,7 +32,7 @@ export class EmployeeService {
   } 
 
   findParticipants(): Observable<Employee[]> {
-    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '==', false), where('isCancel', '==', false)) );
+    let ref = query(collection(this._fs, 'Employees'), and(where('isCheck', '==', true), where('isDraw', '==', false)) );
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
