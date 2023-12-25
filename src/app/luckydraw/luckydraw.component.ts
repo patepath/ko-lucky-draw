@@ -160,6 +160,8 @@ export class LuckydrawComponent {
   }
 
   random2() {
+    let remain = this.present.qty - this.present.give;
+
     if(this.employees.length > 1 && !this.isRandom) {
       this.isRandom = true;
       this.isResult = false;
@@ -171,7 +173,7 @@ export class LuckydrawComponent {
           [this.employees[i], this.employees[inx]] = [this.employees[inx], this.employees[i]];       
         }
 
-        this.participants = [...this.employees];
+        this.participants = [...this.employees.slice(0,remain)];
         len = this.participants.length;
 
         for(let i=len; i<10; i++) {

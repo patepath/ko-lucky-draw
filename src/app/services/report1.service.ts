@@ -16,7 +16,7 @@ export class Report1Service {
   }
 
   async getTotalAmount(): Promise<number> {
-    let ref = query(collection(this._fs, 'Employees'), where('isCheck', '==', true));
+    let ref = query(collection(this._fs, 'Employees'));
     let snap = await getDocs(ref);
     return snap.docs.length; 
   }
