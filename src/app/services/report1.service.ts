@@ -11,7 +11,7 @@ export class Report1Service {
   constructor(private _fs: Firestore) { }
 
   getAllPaticipants(): Observable<Employee[]> {
-    let ref = query(collection(this._fs, 'Employees'), where('isCheck', '==', true));
+    let ref = query(collection(this._fs, 'Employees'));
     return collectionData(ref, { idField: 'id' }) as Observable<Employee[]>;
   }
 
